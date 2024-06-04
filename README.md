@@ -9,7 +9,7 @@ This repository includes the code to replicate the USAC algorithm from paper:
 
 
 
-# PAC
+# USAC
 To train the usac on dmcartpole swingup environment run the following command:
 
 ```
