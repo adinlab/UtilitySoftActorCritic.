@@ -10,7 +10,7 @@ This repository includes the code to replicate the USAC algorithm from paper:
 
 
 # USAC
-To train the usac on dmcartpole swingup environment run the following command:
+To train the usac on cartpole swingup environment run the following command:
 
 ```
 python main.py
