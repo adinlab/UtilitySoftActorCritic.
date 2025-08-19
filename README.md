@@ -3,8 +3,9 @@
 This repository includes the code to replicate the USAC algorithm from paper:
 
 
-> **Exploring Pessimism and Optimism Dynamics in Deep Reinforcement Learning**\
-> _Bahareh Tasdighi, Nicklas Werge, Yi-Shan Wu, Melih Kandemir_\,2024 
+> **Improving Actor-Critic Training with Steerable Action-Value Approximation Errors**\
+> _Bahareh Tasdighi, Nicklas Werge, Yi-Shan Wu, Melih Kandemir_\,2025 
+> _European Conference on Artificial Intelligence_ 
 
 
 
@@ -18,4 +19,7 @@ python main.py
 
 
 
-# Cite as
+## Cite as
+If you use USAC, please cite:
+
+

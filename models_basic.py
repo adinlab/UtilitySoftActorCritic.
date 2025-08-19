@@ -2,21 +2,17 @@ import torch
 from torch import nn
 
 
-
 class Actor(nn.Module):
-    def __init__(self, arch,  n_state, n_action):
+    def __init__(self, arch, n_state, n_action):
         super(Actor, self).__init__()
         self.n_hidden = 256
-        self.device ="cpu"
+        self.device = "cpu"
         self.learning_rate = 3e-4
         self.model = arch(n_state, n_action, self.n_hidden).to(self.device)
         self.optim = torch.optim.Adam(self.model.parameters(), self.learning_rate)
 
-
     def act(self, s, is_training=True):
-        a, e = self.model(
-            s, is_training=is_training
-        )  
+        a, e = self.model(s, is_training=is_training)
         return a, e
 
     def loss(self, s, a, e, critics, alpha):
@@ -31,10 +27,10 @@ class Actor(nn.Module):
         loss.backward()
         self.optim.step()
         return a, e
-    
+
 
 class Critic(nn.Module):
-    def __init__(self, arch,  n_state, n_action):
+    def __init__(self, arch, n_state, n_action):
         super(Critic, self).__init__()
         self.n_hidden = 256
         self.device = "cpu"
@@ -45,7 +41,6 @@ class Critic(nn.Module):
         self.optim = torch.optim.Adam(self.model.parameters(), self.learning_rate)
         self.target = arch(n_state, n_action, self.n_hidden).to(self.device)
         self.init_target()
-
 
     def init_target(self):
         for target_param, local_param in zip(
@@ -58,8 +53,7 @@ class Critic(nn.Module):
             self.target.parameters(), self.model.parameters()
         ):
             target_param.data.copy_(
-                self.tau * local_param.data
-                + (1.0 - self.tau) * target_param.data
+                self.tau * local_param.data + (1.0 - self.tau) * target_param.data
             )
 
     def Q(self, s, a):
@@ -73,15 +67,15 @@ class Critic(nn.Module):
         loss = self.loss(self.Q(s, a), y)
         loss.backward()
         self.optim.step()
-        
+
+
 class CriticEnsemble(nn.Module):
-    def __init__(self, arch,  n_state, n_action, critictype=Critic):
+    def __init__(self, arch, n_state, n_action, critictype=Critic):
         super(CriticEnsemble, self).__init__()
         self.n_elements = 2
         self.critics = [
-            critictype(arch,  n_state, n_action) for _ in range(self.n_elements)
+            critictype(arch, n_state, n_action) for _ in range(self.n_elements)
         ]
-        
 
     def __getitem__(self, item):
         return self.critics[item]
