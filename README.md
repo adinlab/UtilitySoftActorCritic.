@@ -5,7 +5,8 @@ This repository includes the code to replicate the USAC algorithm from paper:
 
 > **Improving Actor-Critic Training with Steerable Action-Value Approximation Errors**\
 > _Bahareh Tasdighi, Nicklas Werge, Yi-Shan Wu, Melih Kandemir, 2025_ \
-> _European Conference on Artificial Intelligence_  
+> _European Conference on Artificial Intelligence_ \
+> [ArXiv](https://arxiv.org/abs/2406.03890) 
 
 
 
